@@ -1,0 +1,17 @@
+CC = g++
+CFLAGS = -std=c++11 -I/path/to/skia/headers -I/path/to/jsoncpp/headers
+LDFLAGS = -L/path/to/skia/libraries -lskia -L/path/to/jsoncpp/libraries -ljsoncpp
+
+SRCS = main.cpp SVGElement.cpp SVGRect.cpp SVGCircle.cpp
+OBJS = $(SRCS:.cpp=.o)
+
+all: myapp
+
+myapp: $(OBJS)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+clean:
+	rm -f myapp $(OBJS)
